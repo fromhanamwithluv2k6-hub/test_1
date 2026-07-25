@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+
 void solve()
 {
     string s; cin>>s;
@@ -20,29 +21,29 @@ void solve()
     {
         cout<<-1; return;
     }
-    int i = 0,j = l-1;
     long long res = 0;
-    while(i<j)
+    int left = 0,right = l - 1;
+    while(left < right)
     {
-        if(s[i] == s[j])
+        int pos = right;
+        if(s[left] == s[pos])
         {
-            i++; j--; continue;
-        }
-        int pos = j;
-        while(pos > i && s[pos] != s[i]) pos--;
-        if(pos == i)
-        {
-            swap(s[i],s[i+1]);
-            res++;//dua phan tu le ve giua
+            left++; right--;
             continue;
         }
-        for(int k = pos ; k<j ; k++)
+        while(s[left] != s[pos]) pos--;
+        if(left == pos)
         {
-            swap(s[k],s[k+1]);//dua phan tu gan nhat ben tinh tu ben phai giong voi phan tu ben trai ve vi tri doi xung voi phan tu trai
+            swap(s[left],s[left+1]);
+            res++;
+            continue;
+        }
+        for(int i = pos ; i<right ; i++)
+        {
+            swap(s[i],s[i+1]);
             res++;
         }
-        i++;
-        j--;
+        left++; right--;
     }
     cout<<res;
 }
